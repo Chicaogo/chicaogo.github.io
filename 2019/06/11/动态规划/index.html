@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>动态规划 | Chicago_01</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="人生就像动态规划一样。">
+<meta name="keywords" content="模板,动态规划,DP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态规划">
+<meta property="og:url" content="http://chicago01.top/2019/06/11/动态规划/index.html">
+<meta property="og:site_name" content="Chicago_01">
+<meta property="og:description" content="人生就像动态规划一样。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005tJLZmly1g3xggpnzhwj30pk0c3jt1.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005tJLZmly1g3xhi944vjj30wh0a4t9m.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/005tJLZmly1g3xi45gcjqj30pj0bj74h.jpg">
+<meta property="og:updated_time" content="2019-06-13T06:21:22.874Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="动态规划">
+<meta name="twitter:description" content="人生就像动态规划一样。">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/005tJLZmly1g3xggpnzhwj30pk0c3jt1.jpg">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/material-design-iconic-font/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-139911401-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <!--<span class="site-title">Chicago_01</span>-->
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">HOME</a>
+                
+                    <a class="main-nav-link" href="/archives">TIMES</a>
+                
+                    <a class="main-nav-link" href="/dream">DREAM</a>
+                
+                    <a class="main-nav-link" href="/some">SOME</a>
+                
+                    <a class="main-nav-link" href="/about">ABOUT</a>
+                
+            </nav>
+            
+            
+            <nav id="sub-nav">
+                <div class="profile" id="profile-nav">
+                    <a id="profile-anchor" href="javascript:;">
+                        <img class="avatar" src="/images/avatar.png">
+                        <i class="zmdi zmdi-caret-down"></i>
+                    </a>
+                </div>
+            </nav>
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="zmdi zmdi-close"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">HOME</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">TIMES</a></td>
+                
+                    <td><a class="main-nav-link" href="/dream">DREAM</a></td>
+                
+                    <td><a class="main-nav-link" href="/some">SOME</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">ABOUT</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            <aside id="sidebar-left">
+
+    <div class="sidebar-fixed">
+        <div class="sidebar-fixed-inner">
+            
+
+<div id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <div class="profile-top-part">
+                <img id="avatar" src="/images/avatar.png">
+                <div class="info-inner">
+                    <h2 id="name">Chicago_01</h2>
+                    <h3 id="title">做好最坏的打算。</h3>
+                </div>
+            </div>
+            <div class="profile-bg"></div>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                <a href="/archives">
+                    67
+                    <span>Entradas</span>
+                </a>
+            </div>
+            <div class="article-info-block">
+                <a href="/archives">
+                    24
+                    <span>Etiquetas</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            
+            
+            <div class="social-link-item">
+                <a href="https://github.com/Chicaogo" target="_blank" title="github" class="tooltip">
+                    <i class="zmdi zmdi-github"></i>
+                </a>
+            </div>
+            
+            <div class="social-link-item">
+                <a href="/about/" target="_blank" title="more" class="tooltip">
+                    <i class="zmdi zmdi-more"></i>
+                </a>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+            
+            <div id="article-content-index" class="anim-fade-in" style="display: none">
+    <div class="widget-wrap">
+        <h3 class="widget-title">内容索引</h3>
+        <div class="widget">
+            <div class="index-list"></div>
+        </div>
+    </div>
+</div>
+            
+        </div>
+    </div>
+
+</aside>
+
+            <section id="main"><article id="post-动态规划" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+
+    
+        <h1 class="article-title" itemprop="name">
+            动态规划
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="zmdi zmdi-calendar"></i>
+        <a href="/2019/06/11/动态规划/">
+            <time datetime="2019-06-11T11:08:47.000Z" itemprop="datePublished">2019-06-11</time>
+        </a>
+    </div>
+
+
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            
+            <blockquote>
+<p>人生就像动态规划一样。 </p>
+</blockquote>
+<a id="more"></a>
+
+<p>我们老实人，先把课件传上来：<a href="/download/动态规划2019年6月3日.pdf">点击下载</a></p>
+<p>众所周知，老生常谈的，动态规划分为坐标型，线性型，区间型，背包型，树型，数位型等动态规划。呢就一个个谈谈吧。</p>
+<h2 id="坐标型"><a href="#坐标型" class="headerlink" title="坐标型"></a>坐标型</h2><p>在二维的坐标系中，规定好了方向，求最值的问题，比较容易的写出动态规划方程。</p>
+<p>最经典的问题就是，给你 $n*m$ 的格子，每个格子上有一定的权值，从左上到右下权值和最大（最小）为多少？</p>
+<p>哎呦，上洛谷上正好找到一个非常不错的例题。</p>
+<h3 id="例题：P1508-Likecloud-吃、吃、吃"><a href="#例题：P1508-Likecloud-吃、吃、吃" class="headerlink" title="例题：P1508 Likecloud-吃、吃、吃"></a>例题：<a href="https://www.luogu.org/problemnew/show/P1508" target="_blank" rel="noopener">P1508 Likecloud-吃、吃、吃</a></h3><h4 id="题目背景"><a href="#题目背景" class="headerlink" title="题目背景"></a>题目背景</h4><p>问世间，青春期为何物？</p>
+<p>答曰：“甲亢，甲亢，再甲亢；挨饿，挨饿，再挨饿！”</p>
+<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>正处在某一特定时期之中的李大水牛由于消化系统比较发达，最近一直处在饥饿的状态中。某日上课，正当他饿得头昏眼花之时，眼前突然闪现出了一个n<em>m(n and m&lt;=200)的矩型的巨型大餐桌，而自己正处在这个大餐桌的一侧的中点下边。餐桌被划分为了n</em>m个小方格，每一个方格中都有一个圆形的巨型大餐盘，上面盛满了令李大水牛朝思暮想的食物。李大水牛已将餐桌上所有的食物按其所能提供的能量打了分（有些是负的，因为吃了要拉肚子），他决定从自己所处的位置吃到餐桌的另一侧，但他吃东西有一个习惯——只吃自己前方或左前方或右前方的盘中的食物。</p>
+<p>由于李大水牛已饿得不想动脑了，而他又想获得最大的能量，因此，他将这个问题交给了你。</p>
+<p>每组数据的出发点都是最后一行的中间位置的下方！</p>
+<h4 id="输入输出格式"><a href="#输入输出格式" class="headerlink" title="输入输出格式"></a>输入输出格式</h4><p>输入格式：</p>
+<p>[输入数据：]</p>
+<p>第一行为m n.(n为奇数)，李大水牛一开始在最后一行的中间的下方</p>
+<p>接下来为m*n的数字距阵.</p>
+<p>共有m行,每行n个数字.数字间用空格隔开.代表该格子上的盘中的食物所能提供的能量.</p>
+<p>数字全是整数.</p>
+<p>输出格式：</p>
+<p>[输出数据：]</p>
+<p>一个数,为你所找出的最大能量值.</p>
+<h4 id="输入输出样例"><a href="#输入输出样例" class="headerlink" title="输入输出样例"></a>输入输出样例</h4><p>输入样例#1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">6 7</span><br><span class="line">16 4 3 12 6 0 3</span><br><span class="line">4 -5 6 7 0 0 2</span><br><span class="line">6 0 -1 -2 3 6 8</span><br><span class="line">5 3 4 0 0 -2 7</span><br><span class="line">-1 7 4 0 7 -5 6</span><br><span class="line">0 -1 3 4 12 4 2</span><br></pre></td></tr></table></figure>
+
+<p>输出样例#1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">41</span><br></pre></td></tr></table></figure>
+
+<h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><p>快吃！快吃！快吃！</p>
+<h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><p>这题跟数字金字塔的做法类似。。</p>
+<p>只不过数字金字塔是往两条路线搜索，这题是往三条路线搜。。。</p>
+<p>动态方程： $f[i][j]=max(max(f[i-1][j],f[i-1][j-1]),f[i-1][j+1])+a[i][j]$;</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,m,a[<span class="number">201</span>][<span class="number">201</span>],f[<span class="number">201</span>][<span class="number">201</span>]=&#123;<span class="number">0</span>&#125;,x,y;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    y=m/<span class="number">2</span>+<span class="number">1</span>;x=n;</span><br><span class="line">    <span class="built_in">memset</span>(a,<span class="number">-9999</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;a[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            f[i][j]=max(max(f[i<span class="number">-1</span>][j],f[i<span class="number">-1</span>][j<span class="number">-1</span>]),f[i<span class="number">-1</span>][j+<span class="number">1</span>])+a[i][j];</span><br><span class="line">            <span class="comment">//动态方程</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;max(max(f[x][y],f[x][y<span class="number">-1</span>]),f[x][y+<span class="number">1</span>])&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">//因为最大值只可能在李大水牛的前方、左前方、右前方，所以只要找这三个的最大就行了</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>引自洛谷题解。</p>
+</blockquote>
+<h3 id="例题：公共汽车"><a href="#例题：公共汽车" class="headerlink" title="例题：公共汽车"></a>例题：公共汽车</h3><h4 id="【问题描述】"><a href="#【问题描述】" class="headerlink" title="【问题描述】"></a>【问题描述】</h4><p>一个城市的道路，南北向的路有n条，并由西向东从1标记到n,东西向的路有m条，并从南向北从1标记到m,每一个交叉点代表一个路口，有的路口有正在等车的乘客。一辆公共汽车将从(1,1)点驶到（n,m）点，车只能向东或者向北开.</p>
+<p>问：司机怎么走能接到最多的乘客。</p>
+<p><img src="https://ws1.sinaimg.cn/large/005tJLZmly1g3xggpnzhwj30pk0c3jt1.jpg" alt></p>
+<h4 id="【输入】"><a href="#【输入】" class="headerlink" title="【输入】"></a>【输入】</h4><p> 第一行是n,m,和k,其中k是有乘客的路口的个数。以下k行是有乘客的路口的坐标和乘客的数量。已知每个路口的乘客数量不超过1000000。n,m&lt;=1000.</p>
+<h4 id="【输出】"><a href="#【输出】" class="headerlink" title="【输出】"></a>【输出】</h4><p> 接到的最多的乘客数。</p>
+<h4 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h4><p> $a[i,j]$ : $ (i,j)$位置的人数，</p>
+<p> $f[i,j]​$:从（1,1）走到$（i，j）​$能接的最多人数。</p>
+<p>$f[i,j]=max{f[i-1,j],f[i,j-1]}+a[i,j]​$</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">1010</span>;</span><br><span class="line"><span class="keyword">long</span> a[maxn][maxn];</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,m,k,t,s,c;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;n,&amp;m,&amp;k);</span><br><span class="line">    <span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;k;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;t,&amp;s,&amp;c);</span><br><span class="line">        a[t][s]=c;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">    a[i][j]+=max(a[i][j<span class="number">-1</span>],a[i<span class="number">-1</span>][j]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%ld"</span>,a[n][m]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="线性型"><a href="#线性型" class="headerlink" title="线性型"></a>线性型</h2><blockquote>
+<p>目标函数为特定变量的线性函数，约束是这些变量的线性不等式（standard form）或等式（slack form），目的是求目标函数的最大值或最小值。这类动态规划是平时比较常见的一类动态规划问题。</p>
+</blockquote>
+<h3 id="LIS最长上升子序列"><a href="#LIS最长上升子序列" class="headerlink" title="LIS最长上升子序列"></a>LIS最长上升子序列</h3><p>LIS (Longest Increasing Subsequence）最长上升子序列：给定n个元素的数列，求最长的上升子序列长度(LIS)。</p>
+<p>一个数的序列$bi$，当$b1&lt;b2&lt;…&lt;bSb1&lt;b2&lt;…&lt;bS$的时候，我们称这个序列是上升的。对于给定的一个序列$(a1,a2,…,aN)$，我们可以得到一些上升的子序列$(ai1,ai2,…,aiK)$，这里$1≤i1&lt;i2&lt;…&lt;iK≤N$。</p>
+<p>比如，对于序列$(1,7,3,5,9,4,8)$，有它的一些上升子序列，如$(1,7),(3,4,8)$等等。这些子序列中最长的长度是4，比如子序列$(1,3,5,8)$。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">8  2  7  1  9  10  1  4  3  -&gt;  2 7 9 10</span><br><span class="line">找出以每个元素为起点的所有的上升子序列：</span><br><span class="line">8 9 10</span><br><span class="line">2 7 9 10</span><br><span class="line">7 9 10</span><br><span class="line">1 9 10</span><br><span class="line">9 10</span><br><span class="line">10</span><br><span class="line">1 4</span><br><span class="line">4</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+
+<p>每个数向后面比他大的点建立有向边；求最长路（顶点数最多）</p>
+<p><img src="https://ws1.sinaimg.cn/large/005tJLZmly1g3xhi944vjj30wh0a4t9m.jpg" alt></p>
+<p>由此可以得出 ： $f[i]=max(f[j])+1 $$(i&lt;j&lt;=n$&amp;&amp;$a[i]&lt;a[j])$</p>
+<h4 id="暴力法"><a href="#暴力法" class="headerlink" title="暴力法"></a>暴力法</h4><p>当然，我们可以考虑一些暴力搜索能不能做，毕竟暴力搜索是我们做题最后得分的法宝。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,ANS;</span><br><span class="line"><span class="keyword">int</span> num[<span class="number">100010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = i + <span class="number">1</span>;j &lt;= n;++j)</span><br><span class="line">        <span class="keyword">if</span>(num[i] &lt; num[j]) ans = max(ans,dfs(j));</span><br><span class="line">    ans++;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++i)</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; num[i];</span><br><span class="line">    </span><br><span class="line">   	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++i)</span><br><span class="line">	   	ANS = max(ANS,dfs(i));</span><br><span class="line">	    </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ANS;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>显然这个暴力非常的暴力，这样做是肯定会超时的，但是我们看看搜索有没有重复的状态！？</p>
+<h4 id="记忆化搜索"><a href="#记忆化搜索" class="headerlink" title="记忆化搜索"></a>记忆化搜索</h4><p>是不是可以加个记忆化搜索呢？真棒！</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,ANS;</span><br><span class="line"><span class="keyword">int</span> num[<span class="number">100010</span>],dp[<span class="number">100010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(dp[i] &gt; <span class="number">0</span>) <span class="keyword">return</span> dp[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = i + <span class="number">1</span>;j &lt;= n;++j)</span><br><span class="line">        <span class="keyword">if</span>(num[i] &lt; num[j]) dp[i] = max(dp[i],dfs(j));</span><br><span class="line">    dp[i]++;</span><br><span class="line">    <span class="keyword">return</span> dp[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++i)</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; num[i];</span><br><span class="line">    </span><br><span class="line">   	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++i)</span><br><span class="line">	   	ANS = max(ANS,dfs(i));</span><br><span class="line">	    </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ANS;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ws1.sinaimg.cn/large/005tJLZmly1g3xi45gcjqj30pj0bj74h.jpg" alt></p>
+<p>糟糕X﹏X！！！！有没有更好的做法呢？</p>
+<h4 id="倒序递推求-dp-i"><a href="#倒序递推求-dp-i" class="headerlink" title="倒序递推求$dp[i]$"></a>倒序递推求$dp[i]$</h4><p>以$num[i]$为<strong>起点</strong>元素的最长上升子序列长度</p>
+<p>每个数向后面比他大的点建立有向边；</p>
+<p>求最长路（顶点数最多）</p>
+<p>观察：边的顺序：$num[i]$向后的边$i+1,i+1,..,n$中选择。</p>
+<p>可以直接倒序求即可。</p>
+<p>$dp[n]=1​$;</p>
+<p>$dp[i]=max(dp[j])+1 (i&lt;j&lt;=n​$&amp;&amp;$num[i]&lt;num[j])​$</p>
+<p>$ans=max(dp[i])$;</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,ans;</span><br><span class="line"><span class="keyword">int</span> num[<span class="number">100010</span>],dp[<span class="number">100010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++i)</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; num[i];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//-------------------------------------------------</span></span><br><span class="line">    dp[n] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n - <span class="number">1</span>;i &gt;= <span class="number">1</span>;i--)</span><br><span class="line">    &#123;</span><br><span class="line">        dp[i] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i + <span class="number">1</span>;j &lt;= n;j++)</span><br><span class="line">            <span class="keyword">if</span>(num[i] &lt; num[j]) dp[i] = max(dp[i],dp[j]);</span><br><span class="line">            dp[i]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//-------------------------------------------------</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++i)</span><br><span class="line">        ans = max(ans,dp[i]);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ans;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="正向递推"><a href="#正向递推" class="headerlink" title="正向递推"></a>正向递推</h4><p>方法当然是越少越好，所以你们自己学吧😂。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,ans;</span><br><span class="line"><span class="keyword">int</span> num[<span class="number">100010</span>],dp[<span class="number">100010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++i)</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; num[i];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//-------------------------------------------------</span></span><br><span class="line">    dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>;i &lt;= n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        dp[i] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= i;++j)</span><br><span class="line">            <span class="keyword">if</span>(num[j] &lt; num[i]) dp[i] = max(dp[i],dp[j]);</span><br><span class="line">            dp[i]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//-------------------------------------------------</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++i)</span><br><span class="line">        ans = max(ans,dp[i]);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ans;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="LIS变式"><a href="#LIS变式" class="headerlink" title="LIS变式"></a>LIS变式</h3><p><strong>求</strong> 最长不下降序 <strong>列长度及输出改序列</strong>。</p>
+<h3 id="合唱队列"><a href="#合唱队列" class="headerlink" title="合唱队列"></a>合唱队列</h3><blockquote>
+<p>这真的是一道好题，吹爆。</p>
+</blockquote>
+<h4 id="题目表述"><a href="#题目表述" class="headerlink" title="题目表述"></a>题目表述</h4><p>N位同学站成一排，音乐老师要请其中的（N-K）位同学出列，使得剩下的K位同学排成合唱队形。合唱队形是指这样的一种队形：设K位同学从左到右依次编号为1，2..，K，他们的身高分别为T1，T2…，Tk，则他们的身高满足T1&lt;…<ti>Ti+1&gt;…&gt;Tk（1≤i≤K）。<br>你的任务是，已知所有N位同学的身高，计算最少需要几位同学出列，可以使得剩下的同学排成合唱队形。</ti></p>
+<h4 id="输入输出格式-1"><a href="#输入输出格式-1" class="headerlink" title="输入输出格式"></a>输入输出格式</h4><h5 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h5><p>共二行。<br>第一行是一个整数N（2≤N≤100），表示同学的总数。<br>第二行有n个整数，用空格分隔，第个整数h（130≤Ti≤230）是第同学的身高（厘米）。</p>
+<h5 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h5><p>一个整数，最少需要几位同学出列。</p>
+<h4 id="输入输出样例-1"><a href="#输入输出样例-1" class="headerlink" title="输入输出样例"></a>输入输出样例</h4><p>输入样例#1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">8</span><br><span class="line">186 186 150 200 160 130 197 220</span><br></pre></td></tr></table></figure>
+
+<p>输出样例#1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4</span><br></pre></td></tr></table></figure>
+
+<h4 id="说明-1"><a href="#说明-1" class="headerlink" title="说明"></a>说明</h4><p>对于50%的数据，保证有n≤20；对于全部的数据，保证有n≤100。</p>
+<h4 id="题解-2"><a href="#题解-2" class="headerlink" title="题解"></a>题解</h4><p>本人觉得这题是很不错的，虽然难度不高。首先，我们要想出列最少，那么就想要留下的最多。很容易想的最长升，但是，这个序列是一个中间高，两头底的序列，最长升只能处理出单调性的序列。</p>
+<p>那么怎么做到呢？</p>
+<p>我们先看从T1到Ti这一段单调递增的序列，再看Ti到TK这一段单调递减的序列，那么问题就解决了。先从1到n求一趟最长升，然后从n到1也求一趟，最后枚举中间的Ti，然后从众多Ti中挑个大的。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;    </span><br><span class="line"><span class="keyword">int</span> a1[<span class="number">105</span>][<span class="number">2</span>];</span><br><span class="line"><span class="keyword">int</span> height[<span class="number">105</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n; <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">cin</span>&gt;&gt;height[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;<span class="comment">//递推求最长上升子序列 </span></span><br><span class="line">            a1[i][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;i;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(height[i]&gt;height[j]) a1[i][<span class="number">0</span>]=max(a1[i][<span class="number">0</span>],a1[j][<span class="number">0</span>]+<span class="number">1</span>);    </span><br><span class="line">            &#125;</span><br><span class="line">    &#125;      </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        a1[i][<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;i;j++) </span><br><span class="line">            <span class="keyword">if</span>(height[i]&lt;height[j]) a1[i][<span class="number">1</span>]=max(a1[i][<span class="number">1</span>],max(a1[j][<span class="number">0</span>],a1[j][<span class="number">1</span>] )+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        ans=max( ans, max( a1[i][<span class="number">0</span>],a1[i][<span class="number">1</span>]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;n-ans;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>摘自洛谷题解</p>
+</blockquote>
+<h3 id="最大上升子序列的和"><a href="#最大上升子序列的和" class="headerlink" title="最大上升子序列的和"></a>最大上升子序列的和</h3><p> 把加1变为加a[i]即可。</p>
+<p> LIS：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">f[n]=<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">f[i]=max(f[j])+<span class="number">1</span> (i&lt;j&lt;=n&amp;&amp;a[i]&lt;a[j])</span><br><span class="line"></span><br><span class="line">ans=max(f[i]);</span><br></pre></td></tr></table></figure>
+
+<p> 变为：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">f[n]=a[n];</span><br><span class="line"></span><br><span class="line">f[i]=max(f[j])+a[i] (i&lt;j&lt;=n&amp;&amp;a[i]&lt;a[j])</span><br><span class="line"></span><br><span class="line">ans=max(f[i]);</span><br></pre></td></tr></table></figure>
+
+<h3 id="最大连续子序列的和"><a href="#最大连续子序列的和" class="headerlink" title="最大连续子序列的和"></a>最大连续子序列的和</h3><p>1、以$a[i]$为结束点和以$a[i-1]$为结束点的最大连续子序列和有没有联系？有什么样的联系？</p>
+<p>2、如果事先已经求得了以$a[i-1]$为结束点的最大连续子序列和为$x$，那么怎样求以$a[i]$为结束点的最大连续子序列？</p>
+<h1 id="2019年6月13日"><a href="#2019年6月13日" class="headerlink" title="2019年6月13日"></a>2019年6月13日</h1><blockquote>
+<p>未完待续☕</p>
+</blockquote>
+
+        
+        </div>
+        
+            
+            <div class="article-copyright">本站文章除注明转载外均为原创，未经允许不要转载哇. ヾ(ﾟｰﾟヾ) http://chicago01.top/2019/06/11/动态规划/index.html</div>
+            
+        
+<div class="article-tag-block">
+    <i class="zmdi zmdi-tag"></i>
+    <a class="tag-link" href="/tags/DP/">DP</a><a class="tag-link" href="/tags/动态规划/">动态规划</a><a class="tag-link" href="/tags/模板/">模板</a>
+</div>
+
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://chicago01.top/2019/06/11/动态规划/" data-id="cjx112s930063asu0yklmbagt" class="article-share-link"><i class="zmdi zmdi-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="zmdi zmdi-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="zmdi zmdi-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="zmdi zmdi-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="zmdi zmdi-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+
+        </footer>
+        
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/05/17/he-gou-zi-ri-chang/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">和狗子日常</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+	<div id="commentContainer"></div>
+</section>
+    
+
+
+
+</section>
+            
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Categorias</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/心路成长/">心路成长</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数学/">数学</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法学习/">算法学习</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法竞赛入门经典/">算法竞赛入门经典</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法竞赛进阶指南/">算法竞赛进阶指南</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科学/">计算机科学</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/题解/">题解</a><span class="category-list-count">12</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Archivos</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Etiquetas</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS剪枝/">DFS剪枝</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DP/">DP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STL/">STL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分/">二分</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/位运算/">位运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图论/">图论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符串/">字符串</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/拓扑排序/">拓扑排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/排序/">排序</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学/">数学</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/最小生成树/">最小生成树</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂项/">杂项</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树状数组/">树状数组</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模拟/">模拟</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模板/">模板</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/游记/">游记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/贪心/">贪心</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/递推/">递推</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/队列/">队列</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Nube de etiquetas</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/DFS剪枝/" style="font-size: 11.25px;">DFS剪枝</a> <a href="/tags/DP/" style="font-size: 11.25px;">DP</a> <a href="/tags/STL/" style="font-size: 10px;">STL</a> <a href="/tags/二分/" style="font-size: 11.25px;">二分</a> <a href="/tags/位运算/" style="font-size: 10px;">位运算</a> <a href="/tags/动态规划/" style="font-size: 11.25px;">动态规划</a> <a href="/tags/图论/" style="font-size: 10px;">图论</a> <a href="/tags/字符串/" style="font-size: 17.5px;">字符串</a> <a href="/tags/拓扑排序/" style="font-size: 10px;">拓扑排序</a> <a href="/tags/排序/" style="font-size: 11.25px;">排序</a> <a href="/tags/搜索/" style="font-size: 12.5px;">搜索</a> <a href="/tags/数学/" style="font-size: 18.75px;">数学</a> <a href="/tags/数据结构/" style="font-size: 16.25px;">数据结构</a> <a href="/tags/最小生成树/" style="font-size: 11.25px;">最小生成树</a> <a href="/tags/杂项/" style="font-size: 16.25px;">杂项</a> <a href="/tags/栈/" style="font-size: 10px;">栈</a> <a href="/tags/树状数组/" style="font-size: 11.25px;">树状数组</a> <a href="/tags/模拟/" style="font-size: 20px;">模拟</a> <a href="/tags/模板/" style="font-size: 15px;">模板</a> <a href="/tags/游记/" style="font-size: 10px;">游记</a> <a href="/tags/贪心/" style="font-size: 17.5px;">贪心</a> <a href="/tags/递推/" style="font-size: 13.75px;">递推</a> <a href="/tags/链表/" style="font-size: 10px;">链表</a> <a href="/tags/队列/" style="font-size: 10px;">队列</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">Links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://memset0.cn/">memset0</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.orchidany.cf">花</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://wgw8875075.github.io/">Devil Zoey</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="zmdi zmdi-chevron-up"></div>
+</aside>
+
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2019 Chicago_01<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme <a href="https://github.com/qwqcode/hexo-theme-icarus">icarus</a>
+        </div>
+    </div>
+</footer>
+
+        
+    
+	<link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css">
+	<script src="https://jjeejj.github.io/js/gitment.js"></script>
+	<script>
+		var gitment = new Gitment({
+			id: "动态规划",
+			owner: 'Chicaogo',
+			repo: 'chicaogo.github.io',
+			oauth: {
+				client_id: '486f0fdbbd6c9e56c577',
+				client_secret: '92dbb0928849948390f25aa4eaca0960a1fb87b5',
+			},
+		})
+		gitment.render('commentContainer')
+	</script>
+	
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+</body>
+</html>

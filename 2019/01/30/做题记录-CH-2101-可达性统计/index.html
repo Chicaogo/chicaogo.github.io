@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>CH 2101 可达性统计 | Chicago_01</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="题目链接 题目描述给定一张N个点M条边的有向无环图，分别统计从每个点出发能够到达的点的数量。 输入格式第一行两个整数N,M，接下来M行每行两个整数x,y，表示从x到y的一条有向边。">
+<meta name="keywords" content="拓扑排序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CH 2101 可达性统计">
+<meta property="og:url" content="http://chicago01.top/2019/01/30/做题记录-CH-2101-可达性统计/index.html">
+<meta property="og:site_name" content="Chicago_01">
+<meta property="og:description" content="题目链接 题目描述给定一张N个点M条边的有向无环图，分别统计从每个点出发能够到达的点的数量。 输入格式第一行两个整数N,M，接下来M行每行两个整数x,y，表示从x到y的一条有向边。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13783432-f2bd39740b3b9b83.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-02-08T14:04:57.558Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CH 2101 可达性统计">
+<meta name="twitter:description" content="题目链接 题目描述给定一张N个点M条边的有向无环图，分别统计从每个点出发能够到达的点的数量。 输入格式第一行两个整数N,M，接下来M行每行两个整数x,y，表示从x到y的一条有向边。">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/13783432-f2bd39740b3b9b83.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/material-design-iconic-font/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-139911401-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <!--<span class="site-title">Chicago_01</span>-->
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">HOME</a>
+                
+                    <a class="main-nav-link" href="/archives">TIMES</a>
+                
+                    <a class="main-nav-link" href="/dream">DREAM</a>
+                
+                    <a class="main-nav-link" href="/some">SOME</a>
+                
+                    <a class="main-nav-link" href="/about">ABOUT</a>
+                
+            </nav>
+            
+            
+            <nav id="sub-nav">
+                <div class="profile" id="profile-nav">
+                    <a id="profile-anchor" href="javascript:;">
+                        <img class="avatar" src="/images/avatar.png">
+                        <i class="zmdi zmdi-caret-down"></i>
+                    </a>
+                </div>
+            </nav>
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="zmdi zmdi-close"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">HOME</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">TIMES</a></td>
+                
+                    <td><a class="main-nav-link" href="/dream">DREAM</a></td>
+                
+                    <td><a class="main-nav-link" href="/some">SOME</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">ABOUT</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            <aside id="sidebar-left">
+
+    <div class="sidebar-fixed">
+        <div class="sidebar-fixed-inner">
+            
+
+<div id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <div class="profile-top-part">
+                <img id="avatar" src="/images/avatar.png">
+                <div class="info-inner">
+                    <h2 id="name">Chicago_01</h2>
+                    <h3 id="title">做好最坏的打算。</h3>
+                </div>
+            </div>
+            <div class="profile-bg"></div>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                <a href="/archives">
+                    67
+                    <span>Entradas</span>
+                </a>
+            </div>
+            <div class="article-info-block">
+                <a href="/archives">
+                    24
+                    <span>Etiquetas</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            
+            
+            <div class="social-link-item">
+                <a href="https://github.com/Chicaogo" target="_blank" title="github" class="tooltip">
+                    <i class="zmdi zmdi-github"></i>
+                </a>
+            </div>
+            
+            <div class="social-link-item">
+                <a href="/about/" target="_blank" title="more" class="tooltip">
+                    <i class="zmdi zmdi-more"></i>
+                </a>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+            
+            <div id="article-content-index" class="anim-fade-in" style="display: none">
+    <div class="widget-wrap">
+        <h3 class="widget-title">内容索引</h3>
+        <div class="widget">
+            <div class="index-list"></div>
+        </div>
+    </div>
+</div>
+            
+        </div>
+    </div>
+
+</aside>
+
+            <section id="main"><article id="post-做题记录-CH-2101-可达性统计" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+
+    
+        <h1 class="article-title" itemprop="name">
+            CH 2101 可达性统计
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="zmdi zmdi-calendar"></i>
+        <a href="/2019/01/30/做题记录-CH-2101-可达性统计/">
+            <time datetime="2019-01-30T14:15:50.000Z" itemprop="datePublished">2019-01-30</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="zmdi zmdi-folder"></i>
+        <a class="article-category-link" href="/categories/题解/">题解</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            
+            <p><a href="https://www.acwing.com/problem/content/description/166/" target="_blank" rel="noopener">题目链接</a></p>
+<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>给定一张N个点M条边的有向无环图，分别统计从每个点出发能够到达的点的数量。</p>
+<h4 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h4><p>第一行两个整数N,M，接下来M行每行两个整数x,y，表示从x到y的一条有向边。</p>
+<a id="more"></a>
+
+<h4 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h4><p>输出共N行，表示每个点能够到达的点的数量。</p>
+<h4 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h4><p>1≤N,M≤30000</p>
+<h4 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">10 10</span><br><span class="line">3 8</span><br><span class="line">2 3</span><br><span class="line">2 5</span><br><span class="line">5 9</span><br><span class="line">5 9</span><br><span class="line">2 3</span><br><span class="line">3 9</span><br><span class="line">4 8</span><br><span class="line">2 10</span><br><span class="line">4 9</span><br></pre></td></tr></table></figure>
+
+<h4 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">6</span><br><span class="line">3</span><br><span class="line">3</span><br><span class="line">2</span><br><span class="line">1</span><br><span class="line">1</span><br><span class="line">1</span><br><span class="line">1</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="题意分析："><a href="#题意分析：" class="headerlink" title="题意分析："></a>题意分析：</h4><p>题目已经说明白，给我们的是DAG(有向无环图)。既然是DAG，可以很容易的联想到拓扑排序。题目让我们统计每个点出发能到达的点的数量，我们可以先模拟一下样例，如下图(只例举出1，2，3三个点)。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13783432-f2bd39740b3b9b83.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="红色是2能到达的点、绿色是3能到达的点"></p>
+<h4 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h4><p>综上所述，设从点 x 出发能够到达的点构成的集合是 f(x)，从点 x 出发能够到达的点，是从 x 的各个后继节点 y 出发能够到达的点的并集，再加上点 x 自身 。</p>
+<p>f(2) = f(3) ∪ f(5) ∪ f(10) = …</p>
+<p>先按照拓扑排序算法求出拓扑序，然后按照拓扑序的倒叙进行计算——因为在拓扑序中，任意一条边 (x , y)，x 都排在 y 之前。</p>
+<h4 id="关于状态压缩-bitset容器："><a href="#关于状态压缩-bitset容器：" class="headerlink" title="关于状态压缩 bitset容器："></a>关于状态压缩 bitset容器：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">转载：https://oi-wiki.org/ds/stl/bitset/</span><br></pre></td></tr></table></figure>
+
+<h5 id="介绍¶"><a href="#介绍¶" class="headerlink" title="介绍¶"></a>介绍<a href="https://oi-wiki.org/ds/stl/bitset/#_1" target="_blank" rel="noopener">¶</a></h5><p><code>std :: bitset</code> 是标准库中的一个<strong>固定大小</strong>序列，其储存的数据只包含 <code>0/1</code></p>
+<p>众所周知，由于内存地址是按字节即 <code>byte</code> 寻址，而非比特 <code>bit</code> ,</p>
+<p>我们一个 <code>bool</code> 类型的变量，虽然只能表示 <code>0/1</code> , 但是也占了 <code>1byte</code> 的内存</p>
+<p><code>bitset</code> 就是通过固定的优化，使得一个字节的八个比特能分别储存 8 位的 <code>0/1</code></p>
+<p>对于一个 4 字节的 <code>int</code> 变量，在只存 <code>0/1</code> 的意义下， <code>bitset</code> 占用空间只是其 </p>
+<p>在某些情况下通过 <code>bitset</code> 可以使你的复杂度除以 32</p>
+<p>当然， <code>vector</code> 的一个特化 <code>vector&lt;bool&gt;</code> 的储存方式同 <code>bitset</code> 一样，区别在于其支持动态开空间，</p>
+<p><code>bitset</code> 则和我们一般的静态数组一样，是在编译时就开好了的。</p>
+<p>那么为什么要用 <code>bitset</code> 而非 <code>vector&lt;bool&gt;</code> ?</p>
+<p>通过以下的介绍，你可以更加详细的看到 <code>bitset</code> 具备的方便操作</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bitset&gt;  // 包含 bitset 的头文件</span></span></span><br></pre></td></tr></table></figure>
+
+<h5 id="运算符¶"><a href="#运算符¶" class="headerlink" title="运算符¶"></a>运算符<a href="https://oi-wiki.org/ds/stl/bitset/#_2" target="_blank" rel="noopener">¶</a></h5><ul>
+<li><p><code>operator[]</code> : 访问其特定的一位</p>
+</li>
+<li><p><code>operator ==/！=</code> : 比较两个 <code>bitset</code> 内容是否完全一样</p>
+</li>
+<li><p><code>operator &amp;=/|=/^=/~</code> : 进行按位与/或/异或/取反操作</p>
+</li>
+<li><p><code>operator &lt;&lt;/&gt;&gt;/&lt;&lt;=/&gt;&gt;=</code> : 进行二进制左移/右移</p>
+</li>
+<li><p><code>operator &lt;&lt;/&gt;&gt;</code> : 流运算符，这意味着你可以通过 <code>cin/cout</code> 进行输入输出</p>
+<p><code>vector&lt;bool&gt;</code> 只具有前两项</p>
+</li>
+</ul>
+<h5 id="成员函数¶"><a href="#成员函数¶" class="headerlink" title="成员函数¶"></a>成员函数<a href="https://oi-wiki.org/ds/stl/bitset/#_3" target="_blank" rel="noopener">¶</a></h5><ul>
+<li><code>test()</code> : 它和 <code>vector</code> 中的 <code>at()</code> 的作用是一样的，和 <code>[]</code> 运算符的区别就是越界检查</li>
+<li><code>count()</code> : 返回 <code>true</code> 的数量</li>
+<li><code>set()</code> : 将整个 <code>bitset</code> 设置成 <code>true</code> , 你也可以传入参数使其设置成你的参数</li>
+<li><code>reset()</code> : 将整个 <code>bitset</code> 设置成 <code>false</code></li>
+<li><code>flip()</code> : 翻转该位 (0 变 1,1 变 0), 相当于逻辑非/异或 1</li>
+<li><code>to_string()</code> : 返回转换成的字符串表达</li>
+<li><code>to_ulong()</code> : 返回转换成的 <code>unsigned long</code> 表达 ( <code>long</code> 在 NT 及 32 位 POSIX 系统下与 <code>int</code> 一样，在 64 位 POSIX 下与 <code>long long</code> 一样）</li>
+<li><code>to_ullong()</code> <strong>C++11</strong>, 返回转换成的 <code>unsigned long long</code> 表达</li>
+</ul>
+<p>这些 <code>vector&lt;bool&gt;</code> 基本都没有</p>
+<h5 id="作用¶"><a href="#作用¶" class="headerlink" title="作用¶"></a>作用<a href="https://oi-wiki.org/ds/stl/bitset/#_4" target="_blank" rel="noopener">¶</a></h5><p>一般来讲，我们可以用 <code>bitset</code> 优化一些可行性 DP, 或者线筛素数 ( <code>notprime</code> 这种 <code>bool</code> 数组可以用 <code>bitset</code> 开到 之类的）</p>
+<p>它最主要的作用还是压掉了内存带来的时间优化， 的常数优化已经可以是复杂度级别的优化了，比如一个 的 算法， 显然很卡，在常数大一点的情况下必然卡不过去，<strong>O（松）不能算！</strong>, 这时候如果我们某一维除以 32, 则可以比较保险的过了这道题</p>
+<p>其实 <code>bitset</code> 不光是一个容器，更是一种思想，我们可以通过手写的方式，来把 <code>long long</code> 什么的压成每 bit 表示一个信息，用 STL 的原因更多是因为它的运算符方便</p>
+<h4 id="AC代码："><a href="#AC代码：" class="headerlink" title="AC代码："></a>AC代码：</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">30000</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="keyword">int</span> in[maxn];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; e[maxn];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; topo;</span><br><span class="line"><span class="built_in">bitset</span>&lt;maxn&gt; f[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">toposort</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	topo.clear();</span><br><span class="line">	<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++i)</span><br><span class="line">		<span class="keyword">if</span>(in[i] == <span class="number">0</span>) q.push(i);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>(q.size())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> u = q.front();</span><br><span class="line">		q.pop();</span><br><span class="line">		</span><br><span class="line">		topo.push_back(u);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; e[u].size();++i)</span><br><span class="line">			<span class="keyword">if</span>(--in[e[u][i]] == <span class="number">0</span>) q.push(e[u][i]);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">	<span class="built_in">memset</span>(in,<span class="number">0</span>,<span class="keyword">sizeof</span>(in));</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= m;++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> x,y;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; x &gt;&gt; y;</span><br><span class="line">		in[y]++;</span><br><span class="line">		e[x].push_back(y);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">find</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	toposort();</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = topo.size() - <span class="number">1</span>;i &gt;= <span class="number">0</span>;i--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> x = topo[i];</span><br><span class="line">		f[x].reset(),f[x][x] = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>;k &lt; e[x].size();++k)</span><br><span class="line">			f[x] |= f[e[x][k]];</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++i)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; f[i].count() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">    init();</span><br><span class="line"></span><br><span class="line">    find();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        
+        </div>
+        
+            
+            <div class="article-copyright">本站文章除注明转载外均为原创，未经允许不要转载哇. ヾ(ﾟｰﾟヾ) http://chicago01.top/2019/01/30/做题记录-CH-2101-可达性统计/index.html</div>
+            
+        
+<div class="article-tag-block">
+    <i class="zmdi zmdi-tag"></i>
+    <a class="tag-link" href="/tags/拓扑排序/">拓扑排序</a>
+</div>
+
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://chicago01.top/2019/01/30/做题记录-CH-2101-可达性统计/" data-id="cjx112s6k002masu0i2o56pfh" class="article-share-link"><i class="zmdi zmdi-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="zmdi zmdi-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="zmdi zmdi-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="zmdi zmdi-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="zmdi zmdi-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+
+        </footer>
+        
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/01/30/0x01-位运算/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más nuevo</strong>
+            <div class="article-nav-title">
+                
+                    0x01 位运算
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2019/01/29/图论入门/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">图论入门</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+	<div id="commentContainer"></div>
+</section>
+    
+
+
+
+</section>
+            
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Categorias</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/心路成长/">心路成长</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数学/">数学</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法学习/">算法学习</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法竞赛入门经典/">算法竞赛入门经典</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法竞赛进阶指南/">算法竞赛进阶指南</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科学/">计算机科学</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/题解/">题解</a><span class="category-list-count">12</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Archivos</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Etiquetas</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS剪枝/">DFS剪枝</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DP/">DP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STL/">STL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分/">二分</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/位运算/">位运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图论/">图论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符串/">字符串</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/拓扑排序/">拓扑排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/排序/">排序</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学/">数学</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/最小生成树/">最小生成树</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂项/">杂项</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树状数组/">树状数组</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模拟/">模拟</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模板/">模板</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/游记/">游记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/贪心/">贪心</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/递推/">递推</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/队列/">队列</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Nube de etiquetas</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/DFS剪枝/" style="font-size: 11.25px;">DFS剪枝</a> <a href="/tags/DP/" style="font-size: 11.25px;">DP</a> <a href="/tags/STL/" style="font-size: 10px;">STL</a> <a href="/tags/二分/" style="font-size: 11.25px;">二分</a> <a href="/tags/位运算/" style="font-size: 10px;">位运算</a> <a href="/tags/动态规划/" style="font-size: 11.25px;">动态规划</a> <a href="/tags/图论/" style="font-size: 10px;">图论</a> <a href="/tags/字符串/" style="font-size: 17.5px;">字符串</a> <a href="/tags/拓扑排序/" style="font-size: 10px;">拓扑排序</a> <a href="/tags/排序/" style="font-size: 11.25px;">排序</a> <a href="/tags/搜索/" style="font-size: 12.5px;">搜索</a> <a href="/tags/数学/" style="font-size: 18.75px;">数学</a> <a href="/tags/数据结构/" style="font-size: 16.25px;">数据结构</a> <a href="/tags/最小生成树/" style="font-size: 11.25px;">最小生成树</a> <a href="/tags/杂项/" style="font-size: 16.25px;">杂项</a> <a href="/tags/栈/" style="font-size: 10px;">栈</a> <a href="/tags/树状数组/" style="font-size: 11.25px;">树状数组</a> <a href="/tags/模拟/" style="font-size: 20px;">模拟</a> <a href="/tags/模板/" style="font-size: 15px;">模板</a> <a href="/tags/游记/" style="font-size: 10px;">游记</a> <a href="/tags/贪心/" style="font-size: 17.5px;">贪心</a> <a href="/tags/递推/" style="font-size: 13.75px;">递推</a> <a href="/tags/链表/" style="font-size: 10px;">链表</a> <a href="/tags/队列/" style="font-size: 10px;">队列</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">Links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://memset0.cn/">memset0</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.orchidany.cf">花</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://wgw8875075.github.io/">Devil Zoey</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="zmdi zmdi-chevron-up"></div>
+</aside>
+
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2019 Chicago_01<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme <a href="https://github.com/qwqcode/hexo-theme-icarus">icarus</a>
+        </div>
+    </div>
+</footer>
+
+        
+    
+	<link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css">
+	<script src="https://jjeejj.github.io/js/gitment.js"></script>
+	<script>
+		var gitment = new Gitment({
+			id: "CH 2101 可达性统计",
+			owner: 'Chicaogo',
+			repo: 'chicaogo.github.io',
+			oauth: {
+				client_id: '486f0fdbbd6c9e56c577',
+				client_secret: '92dbb0928849948390f25aa4eaca0960a1fb87b5',
+			},
+		})
+		gitment.render('commentContainer')
+	</script>
+	
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+</body>
+</html>

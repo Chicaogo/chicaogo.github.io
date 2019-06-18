@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>题解 P1312 【Mayan游戏】 | Chicago_01</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="题解 P1312 【Mayan游戏】题面过长已遮挡 题意体面已经陈述题意（这题没有考语文阅读理解） 题解* 我还记得我曾经给自己找的锅，给某些人讲课的时候说过一句话：体面越长的题，越简单。** *这句话没有错，我会用接下来解决这道题的思路过程，来证明这句话。  首先我们知道存在这么几种操作： a. 交换操作  b. 下沉操作  c. 消除操作  d. 搜索操作  e. 玩完判断  f. 拷贝操作（">
+<meta name="keywords" content="DFS剪枝">
+<meta property="og:type" content="article">
+<meta property="og:title" content="题解 P1312 【Mayan游戏】">
+<meta property="og:url" content="http://chicago01.top/2018/11/07/题解 P1312 【Mayan游戏】/index.html">
+<meta property="og:site_name" content="Chicago_01">
+<meta property="og:description" content="题解 P1312 【Mayan游戏】题面过长已遮挡 题意体面已经陈述题意（这题没有考语文阅读理解） 题解* 我还记得我曾经给自己找的锅，给某些人讲课的时候说过一句话：体面越长的题，越简单。** *这句话没有错，我会用接下来解决这道题的思路过程，来证明这句话。  首先我们知道存在这么几种操作： a. 交换操作  b. 下沉操作  c. 消除操作  d. 搜索操作  e. 玩完判断  f. 拷贝操作（">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-25T10:19:07.477Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="题解 P1312 【Mayan游戏】">
+<meta name="twitter:description" content="题解 P1312 【Mayan游戏】题面过长已遮挡 题意体面已经陈述题意（这题没有考语文阅读理解） 题解* 我还记得我曾经给自己找的锅，给某些人讲课的时候说过一句话：体面越长的题，越简单。** *这句话没有错，我会用接下来解决这道题的思路过程，来证明这句话。  首先我们知道存在这么几种操作： a. 交换操作  b. 下沉操作  c. 消除操作  d. 搜索操作  e. 玩完判断  f. 拷贝操作（">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/material-design-iconic-font/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-139911401-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <!--<span class="site-title">Chicago_01</span>-->
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">HOME</a>
+                
+                    <a class="main-nav-link" href="/archives">TIMES</a>
+                
+                    <a class="main-nav-link" href="/dream">DREAM</a>
+                
+                    <a class="main-nav-link" href="/some">SOME</a>
+                
+                    <a class="main-nav-link" href="/about">ABOUT</a>
+                
+            </nav>
+            
+            
+            <nav id="sub-nav">
+                <div class="profile" id="profile-nav">
+                    <a id="profile-anchor" href="javascript:;">
+                        <img class="avatar" src="/images/avatar.png">
+                        <i class="zmdi zmdi-caret-down"></i>
+                    </a>
+                </div>
+            </nav>
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="zmdi zmdi-close"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">HOME</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">TIMES</a></td>
+                
+                    <td><a class="main-nav-link" href="/dream">DREAM</a></td>
+                
+                    <td><a class="main-nav-link" href="/some">SOME</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">ABOUT</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            <aside id="sidebar-left">
+
+    <div class="sidebar-fixed">
+        <div class="sidebar-fixed-inner">
+            
+
+<div id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <div class="profile-top-part">
+                <img id="avatar" src="/images/avatar.png">
+                <div class="info-inner">
+                    <h2 id="name">Chicago_01</h2>
+                    <h3 id="title">做好最坏的打算。</h3>
+                </div>
+            </div>
+            <div class="profile-bg"></div>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                <a href="/archives">
+                    67
+                    <span>Entradas</span>
+                </a>
+            </div>
+            <div class="article-info-block">
+                <a href="/archives">
+                    24
+                    <span>Etiquetas</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            
+            
+            <div class="social-link-item">
+                <a href="https://github.com/Chicaogo" target="_blank" title="github" class="tooltip">
+                    <i class="zmdi zmdi-github"></i>
+                </a>
+            </div>
+            
+            <div class="social-link-item">
+                <a href="/about/" target="_blank" title="more" class="tooltip">
+                    <i class="zmdi zmdi-more"></i>
+                </a>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+            
+            <div id="article-content-index" class="anim-fade-in" style="display: none">
+    <div class="widget-wrap">
+        <h3 class="widget-title">内容索引</h3>
+        <div class="widget">
+            <div class="index-list"></div>
+        </div>
+    </div>
+</div>
+            
+        </div>
+    </div>
+
+</aside>
+
+            <section id="main"><article id="post-题解 P1312 【Mayan游戏】" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+
+    
+        <h1 class="article-title" itemprop="name">
+            题解 P1312 【Mayan游戏】
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="zmdi zmdi-calendar"></i>
+        <a href="/2018/11/07/题解 P1312 【Mayan游戏】/">
+            <time datetime="2018-11-06T16:00:00.000Z" itemprop="datePublished">2018-11-07</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="zmdi zmdi-folder"></i>
+        <a class="article-category-link" href="/categories/题解/">题解</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            
+            <h1 id="题解-P1312-【Mayan游戏】"><a href="#题解-P1312-【Mayan游戏】" class="headerlink" title="题解 P1312 【Mayan游戏】"></a>题解 P1312 【Mayan游戏】</h1><h2 id="题面"><a href="#题面" class="headerlink" title="题面"></a>题面</h2><p><strong><a href="https://www.luogu.org/problemnew/show/P1312" target="_blank" rel="noopener">过长已遮挡</a></strong></p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p><strong>体面已经陈述题意</strong>（这题没有考语文阅读理解）</p>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p><em>* 我还记得我曾经给自己找的锅，给某些人讲课的时候说过一句话：体面越长的题，越简单。** *这句话没有错，我会用接下来解决这道题的思路过程，来证明这句话。</em></p>
+<ol>
+<li><p>首先我们知道存在这么几种操作：</p>
+<p>a. 交换操作</p>
+<p> b. 下沉操作</p>
+<p> c. 消除操作</p>
+<p> d. 搜索操作</p>
+<p> e. 玩完判断</p>
+<p> f. 拷贝操作（回溯）</p>
+</li>
+<li><p>这时候可以看得出来这里面除了搜索操作，剩余的操作都是模拟，我们只需要分出多个函数进行模拟就好了。</p>
+</li>
+<li><p>但是思路就是如此简单的一道题我却调了一个下午。（代码量是真的大，不压横150+行代码），还是我太菜了。</p>
+</li>
+<li><p>因为数据量非常小，不用怎么优化也能过，但是写代码的时候一定要小心。</p>
+</li>
+</ol>
+<hr>
+<a id="more"></a>
+
+<h3 id="下沉操作"><a href="#下沉操作" class="headerlink" title="下沉操作"></a>下沉操作</h3><p>每次交换完 or 消除完都要进行的操作。</p>
+<ol>
+<li><p>遍历图上的每一个点，如果有颜色，判断下面是否还有颜色</p>
+</li>
+<li><p>没有颜色：立一个$flag$，向下一直找到呢个有颜色的点，然后利用$flag$下沉到有显色点的上方。</p>
+</li>
+<li><p>有颜色：跳出当前列。</p>
+</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= <span class="number">5</span>;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> flag = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= <span class="number">7</span>;++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!mapp[i][j]) flag++;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(!flag) <span class="keyword">continue</span>;</span><br><span class="line">                mapp[i][j - flag] = mapp[i][j];</span><br><span class="line">                mapp[i][j] = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="消除操作"><a href="#消除操作" class="headerlink" title="消除操作"></a>消除操作</h3><p>每次下沉完都要进行的操作。根据题意会有三种情况：只有横着的三个；只有竖着的三个；横着三个交叉在竖着三个之间；横着三个和竖着三个同时出现但不相交。</p>
+<p>但是我们可以把它们归纳到一种情况，就是只要有三个连续相同的出现就加到桶里面，然后再把桶扫一遍，全部染回没有颜色，这样就消除了。</p>
+<p>这里呢还可以加一个小优化，立一个$flag$。因为根据题意，消除完还要进行下沉操作，但是如果我们没有可消除，就浪费了下沉的一些时间。</p>
+<p>代码操作非常简单，只要根据上面的分析进行模拟就好了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">reover</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">bool</span> flag = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= <span class="number">5</span>;++i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= <span class="number">7</span>;++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(i<span class="number">-1</span> &gt;= <span class="number">1</span> &amp;&amp; i+<span class="number">1</span> &lt;= <span class="number">5</span> &amp;&amp; mapp[i][j] &amp;&amp; mapp[i][j] == mapp[i<span class="number">-1</span>][j] &amp;&amp; mapp[i][j] == mapp[i+<span class="number">1</span>][j])</span><br><span class="line">            &#123;</span><br><span class="line">                tong[i][j] = <span class="number">1</span>;</span><br><span class="line">                tong[i<span class="number">-1</span>][j] = <span class="number">1</span>;</span><br><span class="line">                tong[i+<span class="number">1</span>][j] = <span class="number">1</span>;</span><br><span class="line">                flag = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(j<span class="number">-1</span> &gt;= <span class="number">1</span> &amp;&amp; j+<span class="number">1</span> &lt;= <span class="number">7</span> &amp;&amp; mapp[i][j] &amp;&amp; mapp[i][j] == mapp[i][j<span class="number">-1</span>] &amp;&amp; mapp[i][j] == mapp[i][j+<span class="number">1</span>])</span><br><span class="line">            &#123;</span><br><span class="line">                tong[i][j] = <span class="number">1</span>;</span><br><span class="line">                tong[i][j<span class="number">-1</span>] = <span class="number">1</span>;</span><br><span class="line">                tong[i][j+<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">                flag = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(flag) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= <span class="number">5</span>;++i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= <span class="number">7</span>;++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(tong[i][j]) </span><br><span class="line">            &#123;</span><br><span class="line">                mapp[i][j] = <span class="number">0</span>;</span><br><span class="line">                tong[i][j] = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="交换操作"><a href="#交换操作" class="headerlink" title="交换操作"></a>交换操作</h3><p>根据题意可得，交换的流程是这样的：</p>
+<p>交换两个点颜色 -&gt; 下沉操作 -&gt; 消除操作 -&gt; 下沉操作 -&gt; 消除操作</p>
+<p>一直到不能再消除，交换结束。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">move</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> j,<span class="keyword">int</span> flag)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    swap(mapp[i][j],mapp[i+flag][j]);</span><br><span class="line">    update();</span><br><span class="line">    <span class="keyword">while</span>(reover()) update();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="玩完判断"><a href="#玩完判断" class="headerlink" title="玩完判断"></a>玩完判断</h3><p>只需要扫描最后一层，如果还有颜色，肯定是没有玩完。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">gameover</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= <span class="number">5</span>;++i)</span><br><span class="line">        <span class="keyword">if</span>(mapp[i][<span class="number">1</span>]) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="拷贝操作（回溯）"><a href="#拷贝操作（回溯）" class="headerlink" title="拷贝操作（回溯）"></a>拷贝操作（回溯）</h3><p>留一个备份是为了方便我们搜索完一轮后，返回时恢复初值。</p>
+<p>代码非常的简单容易理解。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">move</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> j,<span class="keyword">int</span> flag)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    swap(mapp[i][j],mapp[i+flag][j]);</span><br><span class="line">    update();</span><br><span class="line">    <span class="keyword">while</span>(reover()) update();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="搜索操作"><a href="#搜索操作" class="headerlink" title="搜索操作"></a>搜索操作</h3><p>这一块是最容易出错的，但是细心一些还是能过得，毕竟这个搜索也不需要优化。</p>
+<ol>
+<li><p>如果已经玩完了，直接输出答案，结束程序。</p>
+</li>
+<li><p>如果搜索长度大于等于n了，不用再往后面搜了。</p>
+</li>
+<li><p>留一个备份，方便一会回溯。</p>
+</li>
+<li><p>1和2都不成立，就继续搜。分两种情况，左搜和右搜。</p>
+<p>a. 左搜：首先左边界肯定要大于等于1，左边的方块还没有颜色。</p>
+<p> b. 右搜：首先右边界肯定要小于等于5，相邻两颜色还不能相同。</p>
+</li>
+<li><p><strong>搜完一定要记得回溯</strong></p>
+</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(gameover())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(i != <span class="number">1</span>) <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; ans[i][<span class="number">1</span>] &lt;&lt;<span class="string">" "</span>&lt;&lt; ans[i][<span class="number">2</span>] &lt;&lt;<span class="string">" "</span>&lt;&lt; ans[i][<span class="number">3</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(x == n+<span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    copy(x);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= <span class="number">5</span>;++i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= <span class="number">7</span>;++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(mapp[i][j])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(i<span class="number">-1</span> &gt;= <span class="number">1</span> &amp;&amp; mapp[i<span class="number">-1</span>][j] == <span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    move(i,j,<span class="number">-1</span>);</span><br><span class="line">                    ans[x][<span class="number">1</span>] = i<span class="number">-1</span>;</span><br><span class="line">                    ans[x][<span class="number">2</span>] = j<span class="number">-1</span>;</span><br><span class="line">                    ans[x][<span class="number">3</span>] = <span class="number">-1</span>;</span><br><span class="line">                    </span><br><span class="line">                    dfs(x+<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= <span class="number">5</span>;++i)</span><br><span class="line">                        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= <span class="number">7</span>;++j)</span><br><span class="line">                            mapp[i][j] = last[x][i][j];</span><br><span class="line">                    </span><br><span class="line">                    ans[x][<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">                    ans[x][<span class="number">2</span>] = <span class="number">0</span>;</span><br><span class="line">                    ans[x][<span class="number">3</span>] = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(i+<span class="number">1</span> &lt;= <span class="number">5</span> &amp;&amp; mapp[i][j] != mapp[i+<span class="number">1</span>][j])</span><br><span class="line">                &#123;</span><br><span class="line">                    move(i,j,<span class="number">1</span>);</span><br><span class="line">                    ans[x][<span class="number">1</span>] = i<span class="number">-1</span>;</span><br><span class="line">                    ans[x][<span class="number">2</span>] = j<span class="number">-1</span>;</span><br><span class="line">                    ans[x][<span class="number">3</span>] = <span class="number">1</span>;</span><br><span class="line">                    </span><br><span class="line">                    dfs(x+<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= <span class="number">5</span>;++i)</span><br><span class="line">                        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= <span class="number">7</span>;++j)</span><br><span class="line">                            mapp[i][j] = last[x][i][j];</span><br><span class="line">                    </span><br><span class="line">                    ans[x][<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">                    ans[x][<span class="number">2</span>] = <span class="number">0</span>;</span><br><span class="line">                    ans[x][<span class="number">3</span>] = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>这道题的代码挺考察耐心的，我调了两个小时才调出来AC100分的结果。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> il inline</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> mapp[<span class="number">10</span>][<span class="number">10</span>],ans[<span class="number">10</span>][<span class="number">10</span>],last[<span class="number">10</span>][<span class="number">10</span>][<span class="number">10</span>],tong[<span class="number">10</span>][<span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="function">il <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> X=<span class="number">0</span>,w=<span class="number">0</span>; <span class="keyword">char</span> ch=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(ch)) &#123;w|=ch==<span class="string">'-'</span>;ch=getchar();&#125;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch)) X=(X&lt;&lt;<span class="number">3</span>)+(X&lt;&lt;<span class="number">1</span>)+(ch^<span class="number">48</span>),ch=getchar();</span><br><span class="line">    <span class="keyword">return</span> w?-X:X;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">il <span class="keyword">bool</span> <span class="title">reover</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">bool</span> flag = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= <span class="number">5</span>;++i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= <span class="number">7</span>;++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(i<span class="number">-1</span> &gt;= <span class="number">1</span> &amp;&amp; i+<span class="number">1</span> &lt;= <span class="number">5</span> &amp;&amp; mapp[i][j] &amp;&amp; mapp[i][j] == mapp[i<span class="number">-1</span>][j] &amp;&amp; mapp[i][j] == mapp[i+<span class="number">1</span>][j])</span><br><span class="line">            &#123;</span><br><span class="line">                tong[i][j] = <span class="number">1</span>;</span><br><span class="line">                tong[i<span class="number">-1</span>][j] = <span class="number">1</span>;</span><br><span class="line">                tong[i+<span class="number">1</span>][j] = <span class="number">1</span>;</span><br><span class="line">                flag = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(j<span class="number">-1</span> &gt;= <span class="number">1</span> &amp;&amp; j+<span class="number">1</span> &lt;= <span class="number">7</span> &amp;&amp; mapp[i][j] &amp;&amp; mapp[i][j] == mapp[i][j<span class="number">-1</span>] &amp;&amp; mapp[i][j] == mapp[i][j+<span class="number">1</span>])</span><br><span class="line">            &#123;</span><br><span class="line">                tong[i][j] = <span class="number">1</span>;</span><br><span class="line">                tong[i][j<span class="number">-1</span>] = <span class="number">1</span>;</span><br><span class="line">                tong[i][j+<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">                flag = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(flag) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= <span class="number">5</span>;++i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= <span class="number">7</span>;++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(tong[i][j]) </span><br><span class="line">            &#123;</span><br><span class="line">                mapp[i][j] = <span class="number">0</span>;</span><br><span class="line">                tong[i][j] = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">il <span class="keyword">bool</span> <span class="title">gameover</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= <span class="number">5</span>;++i)</span><br><span class="line">        <span class="keyword">if</span>(mapp[i][<span class="number">1</span>]) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">il <span class="keyword">void</span> <span class="title">copy</span> <span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= <span class="number">5</span>;++i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= <span class="number">7</span>;++j)</span><br><span class="line">        &#123;</span><br><span class="line">            last[x][i][j] = mapp[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">il <span class="keyword">void</span> <span class="title">update</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;   </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= <span class="number">5</span>;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> flag = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= <span class="number">7</span>;++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!mapp[i][j]) flag++;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(!flag) <span class="keyword">continue</span>;</span><br><span class="line">                mapp[i][j - flag] = mapp[i][j];</span><br><span class="line">                mapp[i][j] = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">il <span class="keyword">void</span> <span class="title">move</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> j,<span class="keyword">int</span> flag)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    swap(mapp[i][j],mapp[i+flag][j]);</span><br><span class="line">    update();</span><br><span class="line">    <span class="keyword">while</span>(reover()) update();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(gameover())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(i != <span class="number">1</span>) <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; ans[i][<span class="number">1</span>] &lt;&lt;<span class="string">" "</span>&lt;&lt; ans[i][<span class="number">2</span>] &lt;&lt;<span class="string">" "</span>&lt;&lt; ans[i][<span class="number">3</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(x == n+<span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    copy(x);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= <span class="number">5</span>;++i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= <span class="number">7</span>;++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(mapp[i][j])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(i<span class="number">-1</span> &gt;= <span class="number">1</span> &amp;&amp; mapp[i<span class="number">-1</span>][j] == <span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    move(i,j,<span class="number">-1</span>);</span><br><span class="line">                    ans[x][<span class="number">1</span>] = i<span class="number">-1</span>;</span><br><span class="line">                    ans[x][<span class="number">2</span>] = j<span class="number">-1</span>;</span><br><span class="line">                    ans[x][<span class="number">3</span>] = <span class="number">-1</span>;</span><br><span class="line">                    </span><br><span class="line">                    dfs(x+<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= <span class="number">5</span>;++i)</span><br><span class="line">                        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= <span class="number">7</span>;++j)</span><br><span class="line">                            mapp[i][j] = last[x][i][j];</span><br><span class="line">                    </span><br><span class="line">                    ans[x][<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">                    ans[x][<span class="number">2</span>] = <span class="number">0</span>;</span><br><span class="line">                    ans[x][<span class="number">3</span>] = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(i+<span class="number">1</span> &lt;= <span class="number">5</span> &amp;&amp; mapp[i][j] != mapp[i+<span class="number">1</span>][j])</span><br><span class="line">                &#123;</span><br><span class="line">                    move(i,j,<span class="number">1</span>);</span><br><span class="line">                    ans[x][<span class="number">1</span>] = i<span class="number">-1</span>;</span><br><span class="line">                    ans[x][<span class="number">2</span>] = j<span class="number">-1</span>;</span><br><span class="line">                    ans[x][<span class="number">3</span>] = <span class="number">1</span>;</span><br><span class="line">                    </span><br><span class="line">                    dfs(x+<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= <span class="number">5</span>;++i)</span><br><span class="line">                        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= <span class="number">7</span>;++j)</span><br><span class="line">                            mapp[i][j] = last[x][i][j];</span><br><span class="line">                    </span><br><span class="line">                    ans[x][<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">                    ans[x][<span class="number">2</span>] = <span class="number">0</span>;</span><br><span class="line">                    ans[x][<span class="number">3</span>] = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    n = read();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= <span class="number">5</span>;++i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= <span class="number">8</span>;++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> x = read();</span><br><span class="line">            <span class="keyword">if</span>(x == <span class="number">0</span>) <span class="keyword">break</span>; </span><br><span class="line">            mapp[i][j] = x;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    dfs(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"-1\n"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+        </div>
+        
+            
+            <div class="article-copyright">本站文章除注明转载外均为原创，未经允许不要转载哇. ヾ(ﾟｰﾟヾ) http://chicago01.top/2018/11/07/题解 P1312 【Mayan游戏】/index.html</div>
+            
+        
+<div class="article-tag-block">
+    <i class="zmdi zmdi-tag"></i>
+    <a class="tag-link" href="/tags/DFS剪枝/">DFS剪枝</a>
+</div>
+
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://chicago01.top/2018/11/07/题解 P1312 【Mayan游戏】/" data-id="cjx112s8z005yasu0dv7qel16" class="article-share-link"><i class="zmdi zmdi-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="zmdi zmdi-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="zmdi zmdi-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="zmdi zmdi-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="zmdi zmdi-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+
+        </footer>
+        
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/01/25/回望2018，展望未来！/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más nuevo</strong>
+            <div class="article-nav-title">
+                
+                    回望2018，展望未来！
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2018/11/07/题解 P1550 【[USACO08OCT]打井Watering Hole】/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">题解 P1550 【[USACO08OCT]打井Watering Hole】</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+	<div id="commentContainer"></div>
+</section>
+    
+
+
+
+</section>
+            
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Categorias</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/心路成长/">心路成长</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数学/">数学</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法学习/">算法学习</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法竞赛入门经典/">算法竞赛入门经典</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法竞赛进阶指南/">算法竞赛进阶指南</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机科学/">计算机科学</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/题解/">题解</a><span class="category-list-count">12</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Archivos</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Etiquetas</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS剪枝/">DFS剪枝</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DP/">DP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STL/">STL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分/">二分</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/位运算/">位运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图论/">图论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符串/">字符串</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/拓扑排序/">拓扑排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/排序/">排序</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学/">数学</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/最小生成树/">最小生成树</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂项/">杂项</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树状数组/">树状数组</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模拟/">模拟</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模板/">模板</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/游记/">游记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/贪心/">贪心</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/递推/">递推</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/队列/">队列</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Nube de etiquetas</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/DFS剪枝/" style="font-size: 11.25px;">DFS剪枝</a> <a href="/tags/DP/" style="font-size: 11.25px;">DP</a> <a href="/tags/STL/" style="font-size: 10px;">STL</a> <a href="/tags/二分/" style="font-size: 11.25px;">二分</a> <a href="/tags/位运算/" style="font-size: 10px;">位运算</a> <a href="/tags/动态规划/" style="font-size: 11.25px;">动态规划</a> <a href="/tags/图论/" style="font-size: 10px;">图论</a> <a href="/tags/字符串/" style="font-size: 17.5px;">字符串</a> <a href="/tags/拓扑排序/" style="font-size: 10px;">拓扑排序</a> <a href="/tags/排序/" style="font-size: 11.25px;">排序</a> <a href="/tags/搜索/" style="font-size: 12.5px;">搜索</a> <a href="/tags/数学/" style="font-size: 18.75px;">数学</a> <a href="/tags/数据结构/" style="font-size: 16.25px;">数据结构</a> <a href="/tags/最小生成树/" style="font-size: 11.25px;">最小生成树</a> <a href="/tags/杂项/" style="font-size: 16.25px;">杂项</a> <a href="/tags/栈/" style="font-size: 10px;">栈</a> <a href="/tags/树状数组/" style="font-size: 11.25px;">树状数组</a> <a href="/tags/模拟/" style="font-size: 20px;">模拟</a> <a href="/tags/模板/" style="font-size: 15px;">模板</a> <a href="/tags/游记/" style="font-size: 10px;">游记</a> <a href="/tags/贪心/" style="font-size: 17.5px;">贪心</a> <a href="/tags/递推/" style="font-size: 13.75px;">递推</a> <a href="/tags/链表/" style="font-size: 10px;">链表</a> <a href="/tags/队列/" style="font-size: 10px;">队列</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">Links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://memset0.cn/">memset0</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.orchidany.cf">花</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://wgw8875075.github.io/">Devil Zoey</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="zmdi zmdi-chevron-up"></div>
+</aside>
+
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2019 Chicago_01<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme <a href="https://github.com/qwqcode/hexo-theme-icarus">icarus</a>
+        </div>
+    </div>
+</footer>
+
+        
+    
+	<link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css">
+	<script src="https://jjeejj.github.io/js/gitment.js"></script>
+	<script>
+		var gitment = new Gitment({
+			id: "题解 P1312 【Mayan游戏】",
+			owner: 'Chicaogo',
+			repo: 'chicaogo.github.io',
+			oauth: {
+				client_id: '486f0fdbbd6c9e56c577',
+				client_secret: '92dbb0928849948390f25aa4eaca0960a1fb87b5',
+			},
+		})
+		gitment.render('commentContainer')
+	</script>
+	
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+</body>
+</html>
